@@ -1,0 +1,12 @@
+node_modules/
+dist/
+*.log
+
+# Local config containing credentials: never commit. Use .mcp.json.example as the template.
+.mcp.json
+.env
+.env.*
+
+# Local one-off scripts (account-specific, not part of the server)
+fs_health.py
+health_low.mjs

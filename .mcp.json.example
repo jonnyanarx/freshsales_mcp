@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "freshsales": {
+      "command": "node",
+      "args": ["/absolute/path/to/freshsales_mcp/dist/index.js"],
+      "env": {
+        "FRESHSALES_DOMAIN": "yourcompany.myfreshworks.com/crm/sales",
+        "FRESHSALES_API_KEY": "your_api_key"
+      }
+    }
+  }
+}
