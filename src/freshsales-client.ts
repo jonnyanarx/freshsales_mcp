@@ -508,6 +508,16 @@ export class FreshsalesClient {
     return this.getOne<Account>('sales_accounts', 'sales_account', accountId);
   }
 
+  /** All contacts linked to an account (GET /sales_accounts/{id}?include=contacts). */
+  async listAccountContacts(accountId: number): Promise<{ contacts: Contact[]; totalContactIds: number }> {
+    const data = await this.request<{ contacts?: Contact[]; sales_account?: { contact_ids?: number[] } }>(
+      'GET',
+      `/sales_accounts/${accountId}?include=contacts`
+    );
+    const contacts = data.contacts || [];
+    return { contacts, totalContactIds: data.sales_account?.contact_ids?.length ?? contacts.length };
+  }
+
   async createAccount(params: CreateAccountParams): Promise<Account> {
     return this.createOne<Account>('sales_accounts', 'sales_account', this.buildAccountBody(params));
   }

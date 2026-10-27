@@ -1,6 +1,6 @@
 # Freshsales MCP Server
 
-An MCP (Model Context Protocol) server for the Freshsales (Freshworks CRM) API. Provides 30 tools for managing leads, contacts, accounts, deals, tasks, appointments and notes from any MCP client (Claude Desktop, Claude Code, VS Code, ...).
+An MCP (Model Context Protocol) server for the Freshsales (Freshworks CRM) API. Provides 31 tools for managing leads, contacts, accounts, deals, tasks, appointments and notes from any MCP client (Claude Desktop, Claude Code, VS Code, ...).
 
 Freshworks does not ship an official Freshsales MCP server, so this one wraps the REST API directly. It is the CRM companion to [freshdesk_mcp](https://github.com/NeuraLegion/freshdesk_mcp) and follows the same structure.
 
@@ -99,7 +99,7 @@ Then restart your MCP client so it relaunches the server.
 
 The server exits immediately with an error if either is missing.
 
-## Available Tools (30 Total)
+## Available Tools (31 Total)
 
 ### Discovery (4 tools)
 | Tool | Description |
@@ -118,11 +118,12 @@ The server exits immediately with an error if either is missing.
 | `update_contact` | Update a contact |
 | `search_contacts` | Search contacts |
 
-### Accounts (5 tools)
+### Accounts (6 tools)
 | Tool | Description |
 |------|-------------|
 | `list_accounts` | List accounts (companies) from a view |
 | `view_account` | View account details |
+| `list_account_contacts` | List every contact linked to an account (search is capped at 10 results) |
 | `create_account` | Create an account |
 | `update_account` | Update an account |
 | `search_accounts` | Search accounts |

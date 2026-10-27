@@ -408,6 +408,23 @@ server.tool(
 );
 
 server.tool(
+  'list_account_contacts',
+  'List every contact linked to an account (company). Unlike search_contacts (capped at 10 results), this returns the account\'s full contact list.',
+  { account_id: z.number().describe('Account ID — see search_accounts/list_accounts') },
+  async ({ account_id }) => {
+    try {
+      const { contacts, totalContactIds } = await client.listAccountContacts(account_id);
+      if (contacts.length === 0) return { content: [{ type: 'text', text: 'No contacts linked to this account.' }] };
+      const summary = contacts.map((c) => `#${c.id} | ${c.display_name || `${c.first_name || ''} ${c.last_name || ''}`.trim()} | ${c.email || (c.emails as { value: string }[])?.[0]?.value || 'N/A'}`).join('\n');
+      const truncated = totalContactIds > contacts.length ? `\n\nWarning: the account has ${totalContactIds} contacts but only ${contacts.length} were returned.` : '';
+      return { content: [{ type: 'text', text: `Found ${contacts.length} contact(s):\n\n${summary}${truncated}` }] };
+    } catch (error) {
+      return { content: [{ type: 'text', text: `Error: ${error instanceof Error ? error.message : String(error)}` }], isError: true };
+    }
+  }
+);
+
+server.tool(
   'create_account',
   'Create a new account (company).',
   {
